@@ -59,7 +59,7 @@ Bitte installiere das Übungsprojekt schon vor Beginn des Workshops.
 
 Du kannst dir entweder  
 * dieses Repository per Git herunterladen und in den Ordner `book-rating` wechseln<br>**oder**<br>  
-* den Code als ZIP-Datei herunterladen: [book-rating.zip](TODO)
+* den Code als ZIP-Datei herunterladen: [book-rating.zip](https://github.com/angular-schule/2022-09-angular-workshop-boeblingen/files/9614741/book-rating.zip)
 
 > ⚠️ Bitte installiere das Projekt nicht auf einem Netzlaufwerk, sondern direkt auf der lokalen Festplatte!
 
@@ -74,6 +74,10 @@ Warte beim Schritt `Installing packages (npm)` mit Geduld ab!
 
 
 > Auf http://localhost:4200 sollte nun eine Website mit der Überschrift *"Book Rating"* erscheinen!
+
+<br>
+
+![Screenshot CLI](screenshot.png)
 
 Beende danach den laufenden Webserver mit Strg + C.
 
@@ -93,11 +97,11 @@ Anschließend kannst du den Prozess wieder mit Strg + C beenden.
 ### Wir freuen uns schon! 🙂
 
 Wenn bei allen Teilnehmenden das Grundgerüst steht, können wir ohne Zeitverlust loslegen.
-Sollte es zu einer Fehlermeldung kommen, dann sende uns den Fehlertext einfach per Mail an [team@angular.schule](mailto:team@angular.schule) oder bringe deine Fragen zum Technikcheck mit.
+Sollte es zu einer Fehlermeldung kommen, dann sende uns den Fehlertext einfach per Mail an [team@angular.schule](mailto:team@angular.schule).
 
 <hr>
 
-<img src="http://assets.angular.schule/logo-angular-schule.png" height="60">
+<img src="https://assets.angular.schule/logo-angular-schule.png" height="60">
 
 ### &copy; https://angular.schule | Stand: 21.09.2022
 
