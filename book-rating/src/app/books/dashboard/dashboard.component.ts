@@ -12,7 +12,7 @@ export class DashboardComponent {
 
   selectedBook?: Book;
 
-  constructor(private rs: BookRatingService) {
+  constructor(public rs: BookRatingService) {
     this.books = [
       {
         isbn: '123',
