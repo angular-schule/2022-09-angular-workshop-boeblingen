@@ -4,7 +4,7 @@
       src="//api.angular.schule/avatar/{{ book.rating }}">
     <div class="card-title">
       <h2>
-        {{ book.title }}
+        {{ book.title  }}
         <span class="badge bg-secondary me-2">{{ book.rating }}</span>
       </h2>
     </div>
@@ -13,5 +13,7 @@
 
     <button [disabled]="rateDownAllowed(book)" class="btn btn-primary me-2" (click)="doRateDown()">-1</button>
     <button [disabled]="rateUpAllowed(book)" class="btn btn-primary"      (click)="doRateUp()">+1</button>
+
+    {{ log() }}
 </div>
 </div>

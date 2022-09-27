@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Book } from '../shared/book';
 
 @Component({
   selector: 'br-book-form',
   templateUrl: './book-form.component.html',
-  styleUrls: ['./book-form.component.scss']
+  styleUrls: ['./book-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookFormComponent {
 

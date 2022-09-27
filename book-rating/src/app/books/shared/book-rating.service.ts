@@ -17,10 +17,12 @@ export class BookRatingService {
   }
 
   rateDown(book: Book): Book {
-    return {
-      ...book,
-      rating: Math.max(book.rating - 1, minRating)
-    };
+    // return {
+    //   ...book,
+    //   rating: Math.max(book.rating - 1, minRating)
+    // };
+    book.rating -= 1;
+    return book;
   }
 
   rateUpAllowed(book: Book) {
