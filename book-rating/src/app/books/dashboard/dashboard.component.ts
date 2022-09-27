@@ -10,6 +10,8 @@ import { BookRatingService } from '../shared/book-rating.service';
 export class DashboardComponent {
   books: Book[] = [];
 
+  selectedBook?: Book;
+
   constructor(private rs: BookRatingService) {
     this.books = [
       {
@@ -55,6 +57,12 @@ export class DashboardComponent {
   }
 
   addBook(book: Book): void {
+
+    // TODO! zwischen neuen und altern Büchern unterscheiden!
     this.books = [...this.books, book];
+  }
+
+  editBook(book: Book): void {
+    this.selectedBook = book;
   }
 }

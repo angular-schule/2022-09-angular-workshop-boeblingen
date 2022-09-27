@@ -12,6 +12,21 @@ export class BookFormComponent {
   @Output()
   create = new EventEmitter<Book>();
 
+  selectedBook?: Book;
+
+  @Input()
+  set book(book: Book | undefined) {
+    this.selectedBook = book;
+
+    if (book) {
+      this.bookForm.setValue({
+        isbn: book.isbn,
+        title: book.title,
+        description: book.description
+      });
+    }
+  }
+
   bookForm = new FormGroup({
 
     isbn: new FormControl('', {
@@ -45,15 +60,6 @@ export class BookFormComponent {
     return control.touched && control.invalid;
   }
 
-  setBook(book: Book): void {
-    /*{
-      isbn
-      title
-      description
-    }*/
-    this.bookForm.setValue(book);
-  }
-
   submitForm():void {
 
     // if (this.bookForm.invalid) {
@@ -61,8 +67,6 @@ export class BookFormComponent {
     //   return;
     // }
 
-    this.bookForm.get('isbn')?.value;
-    this.bookForm.controls.isbn.value;
 
     const newBook: Book = {
       ...this.bookForm.getRawValue(),
