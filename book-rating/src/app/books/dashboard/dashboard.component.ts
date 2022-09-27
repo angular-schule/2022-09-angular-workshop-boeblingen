@@ -7,14 +7,14 @@ import { BookRatingService } from '../shared/book-rating.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   books: Book[] = [];
 
   constructor(private rs: BookRatingService) {
     this.books = [
       {
         isbn: '123',
-        title: 'Angular',
+        title: 'Angular =)',
         description: 'Grundlagen und mehr',
         price: 36.9,
         rating: 5
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
     // this.books = this.books.map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
   }
 
-  ngOnInit(): void {
+  addBook(book: Book): void {
+    this.books = [...this.books, book];
   }
-
 }

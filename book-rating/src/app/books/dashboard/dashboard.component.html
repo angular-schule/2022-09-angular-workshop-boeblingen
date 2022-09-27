@@ -1,3 +1,5 @@
+<br-book-form (create)="addBook($event)"></br-book-form>
+
 <br-book
   *ngFor="let b of books"
   (rateUp)="doRateUp($event)"
