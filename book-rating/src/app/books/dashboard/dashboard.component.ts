@@ -51,19 +51,22 @@ export class DashboardComponent {
     this.updateList(ratedBook);
   }
 
+  addBook(newBook: Book): void {
+    this.books = [...this.books, newBook];
+  }
+
+  changeBook(changeBook: Book): void {
+    this.updateList(changeBook);
+    this.selectedBook = undefined;
+  }
+
+  changeToEditMode(book: Book): void {
+    this.selectedBook = book;
+  }
+
   private updateList(ratedBook: Book) {
     this.books = this.books
       .map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
       .sort((a, b) => b.rating - a.rating)
-  }
-
-  addBook(book: Book): void {
-
-    // TODO! zwischen neuen und altern Büchern unterscheiden!
-    this.books = [...this.books, book];
-  }
-
-  editBook(book: Book): void {
-    this.selectedBook = book;
   }
 }

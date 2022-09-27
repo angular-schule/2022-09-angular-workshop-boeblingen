@@ -13,11 +13,13 @@ export class BookFormComponent {
   @Output()
   create = new EventEmitter<Book>();
 
+  @Output()
+  edit = new EventEmitter<Book>();
+
   selectedBook?: Book;
 
   @Input()
   set book(book: Book | undefined) {
-    this.selectedBook = book;
 
     if (book) {
       this.bookForm.setValue({
@@ -25,7 +27,12 @@ export class BookFormComponent {
         title: book.title,
         description: book.description
       });
+      this.c.isbn.disable();
+    } else {
+      this.c.isbn.enable();
     }
+
+    this.selectedBook = book;
   }
 
   bookForm = new FormGroup({
@@ -63,19 +70,25 @@ export class BookFormComponent {
 
   submitForm():void {
 
-    // if (this.bookForm.invalid) {
-    //   this.bookForm.markAllAsTouched();
-    //   return;
-    // }
+    if (!this.selectedBook) {
 
+      const newBook = {
+        ...this.bookForm.getRawValue(),
+        rating: 1,
+        price: 1
+      };
 
-    const newBook: Book = {
-      ...this.bookForm.getRawValue(),
-      rating: 1,
-      price: 1
-    };
+      this.create.next(newBook);
 
-    this.create.next(newBook);
+    } else {
+
+      const updatedBook = {
+        ...this.bookForm.getRawValue(),
+        rating: this.selectedBook.rating,
+        price: this.selectedBook.price
+      }
+      this.edit.next(updatedBook);
+    }
 
     this.bookForm.reset();
   }
