@@ -1,6 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, mergeAll } from 'rxjs';
+import { catchError, map, mergeAll, mergeMap, of, retry, switchMap } from 'rxjs';
 import { BookStoreService } from '../book-store.service';
 
 @Component({
@@ -10,11 +11,19 @@ import { BookStoreService } from '../book-store.service';
 })
 export class DetailsComponent {
 
-  books$ = this.route.paramMap.pipe(
+  book$ = this.route.paramMap.pipe(
     map(paramMap => paramMap.get('isbn')!),
-    map(isbn => this.bs.getSingleBook(isbn)),
-    mergeAll()
-  )
+    switchMap(isbn => this.bs.getSingleBook(isbn).pipe(
+      retry(3),
+      catchError((err: HttpErrorResponse) => of({
+        isbn: '0000',
+        title: 'FEHLER',
+        description: err.message,
+        rating: 1,
+        price: 1
+      }))
+    ))
+  );
 
   constructor(
     private route: ActivatedRoute,

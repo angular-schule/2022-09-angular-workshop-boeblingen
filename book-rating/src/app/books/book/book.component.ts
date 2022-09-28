@@ -9,7 +9,7 @@ import { Book } from '../shared/book';
 })
 export class BookComponent {
 
-  @Input() book?: Book;
+  @Input() book?: Book | null;
   @Input() rateUpAllowed = (book: Book) => true;
   @Input() rateDownAllowed = (book: Book) => true;
 
@@ -17,11 +17,15 @@ export class BookComponent {
   @Output() rateDown = new EventEmitter<Book>();
 
   doRateUp() {
-    this.rateUp.emit(this.book);
+    if (this.book) {
+      this.rateUp.emit(this.book);
+    }
   }
 
   doRateDown() {
-    this.rateDown.emit(this.book);
+    if (this.book) {
+      this.rateDown.emit(this.book);
+    }
   }
 
   log() {
