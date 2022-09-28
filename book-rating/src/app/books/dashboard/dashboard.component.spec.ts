@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, EventEmitter, Input, NO_ERRORS_SCHEMA, Output } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookFormComponent } from '../book-form/book-form.component';
@@ -7,6 +7,28 @@ import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
 
 import { DashboardComponent } from './dashboard.component';
+
+@Component({
+  selector: 'br-book-form',
+  template: '' })
+class DummyBookFormComponent {
+  @Output() create = new EventEmitter<Book>();
+  @Output() edit = new EventEmitter<Book>();
+  @Input() book?: Book;
+}
+
+@Component({
+  selector: 'br-book',
+  template: '' })
+class DummyBookComponent {
+  @Input() book?: Book;
+  @Input() rateUpAllowed?:  () => true;
+  @Input() rateDownAllowed?:  () => true;
+
+  @Output() rateUp = new EventEmitter<Book>();
+  @Output() rateDown = new EventEmitter<Book>();
+}
+
 
 fdescribe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -24,16 +46,19 @@ fdescribe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
-        BookComponent, // Integration-Test
-        BookFormComponent // Integration-Test
+        DummyBookFormComponent,
+        DummyBookComponent
+        // BookComponent, // Integration-Test
+        // BookFormComponent // Integration-Test
       ],
-      imports: [
-        ReactiveFormsModule
-      ],
+      // imports: [
+      //   ReactiveFormsModule // Integration-Test
+      // ],
       providers: [{
         provide: BookRatingService,
         useValue: bookRatingMock
-      }]
+      }],
+      // schemas: [NO_ERRORS_SCHEMA] // Shallow Unit Test
     })
     .compileComponents();
 
