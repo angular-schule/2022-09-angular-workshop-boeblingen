@@ -1,12 +1,14 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BookFormComponent } from '../book-form/book-form.component';
 import { BookComponent } from '../book/book.component';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
 
 import { DashboardComponent } from './dashboard.component';
 
-describe('DashboardComponent', () => {
+fdescribe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let bookRatingMock: any;
@@ -22,7 +24,11 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
-        BookComponent // Integration-Test
+        BookComponent, // Integration-Test
+        BookFormComponent // Integration-Test
+      ],
+      imports: [
+        ReactiveFormsModule
       ],
       providers: [{
         provide: BookRatingService,
