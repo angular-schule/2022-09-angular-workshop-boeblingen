@@ -21,7 +21,21 @@ export class GameScoreComponent {
 
     /******************************/
 
-    
+    this.score$.pipe(
+      scan((acc, item) => acc + item, 0)
+    ).subscribe(score => this.currentScore = score);
+
+    this.score$.pipe(
+      reduce((acc, item) => acc + item, 0)
+    ).subscribe(score => this.finalScore = score);
+
+    // this.score$.pipe(
+    //   scan((acc, item) => acc + item, 0)
+    // ).subscribe({
+    //   next: score => this.currentScore = score,
+    //   complete: () => this.finalScore = this.currentScore
+    // });
+
     /******************************/
 
     this.score$.subscribe({
