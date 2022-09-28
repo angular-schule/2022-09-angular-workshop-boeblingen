@@ -30,7 +30,7 @@ class DummyBookComponent {
 }
 
 
-fdescribe('DashboardComponent', () => {
+describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let bookRatingMock: any;

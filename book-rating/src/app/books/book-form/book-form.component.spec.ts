@@ -20,4 +20,12 @@ describe('BookFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // Bitte so nicht schummeln! :-(
+  // it('should do important stuff', () => {
+  //   const dummyBook = { isbn: '', title: '', description: '', rating: 1, price: 1 };
+  //   component.book = dummyBook;
+  //   component.book = undefined;
+  //   expect(component).toBeTruthy();
+  // });
 });
