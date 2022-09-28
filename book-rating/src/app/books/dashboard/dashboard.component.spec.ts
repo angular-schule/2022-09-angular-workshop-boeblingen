@@ -9,11 +9,14 @@ import { DashboardComponent } from './dashboard.component';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  let bookRatingMock: any;
 
   beforeEach(async () => {
 
-    const bookRatingMock = {
-      rateUp: (book: Book) => book
+    bookRatingMock = {
+      rateUp: (book: Book) => book,
+      rateDownAllowed: () => true,
+      rateUpAllowed: () => true
     };
 
     await TestBed.configureTestingModule({
@@ -33,7 +36,16 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('TODO', () => {
-    expect(true).toBeTruthy();
+  it('doRateUp() should forward all calls to BookRatingService', () => {
+
+    // andere Variante
+    // const rs = TestBed.inject(BookRatingService);
+
+    spyOn(bookRatingMock, 'rateUp').and.callThrough();
+
+    const dummyBook = { isbn: '', title: '', description: '', rating: 1, price: 1 };
+    component.doRateUp(dummyBook);
+
+    expect(bookRatingMock.rateUp).toHaveBeenCalledOnceWith(dummyBook);
   });
 });

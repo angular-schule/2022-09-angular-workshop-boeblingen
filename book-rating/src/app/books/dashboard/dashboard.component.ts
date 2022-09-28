@@ -42,6 +42,10 @@ export class DashboardComponent {
   }
 
   doRateUp(book: Book) {
+    // const ratedBook = {
+    //   ...book,
+    //   rating: Math.min(book.rating + 1, 5)
+    // };
     const ratedBook = this.rs.rateUp(book);
     this.updateList(ratedBook);
   }
