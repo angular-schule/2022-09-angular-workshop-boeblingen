@@ -30,11 +30,25 @@ export class CreatingComponent {
     }
 
     // Observable
-    const observable = of('😆', '😄', '😎')
+    // const observable = of('😆', '😄', '😎')
+    const observable = new Observable<string>(subscriber => {
+
+      subscriber.next('😃');
+      const x =setTimeout(() => { subscriber.next('😄'); console.log('Zombie Code') }, 1000);
+      const y = setTimeout(() => subscriber.complete(), 3000);
+
+      return () => {
+        console.log('Es wurde unsubscribed. Wir sollten aufräumen!');
+        clearTimeout(x);
+        clearTimeout(y);
+      }
+    });
+
 
     // Subscription
     const subscription = observable.subscribe(observer);
-    subscription.unsubscribe();
+
+    setTimeout(() => subscription.unsubscribe(), 500);
 
     /******************************/
   }
