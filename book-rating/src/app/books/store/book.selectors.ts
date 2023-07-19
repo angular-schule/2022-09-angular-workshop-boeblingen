@@ -1,6 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Book } from '../shared/book';
-import { bookFeature, selectBooks, selectLoading } from './book.reducer';
+import { bookFeature } from './book.reducer';
+
+
+export const {
+  selectBookState,
+  selectBooks,
+  selectLoading
+} = bookFeature;
 
 /*
 export const selectBookState = createFeatureSelector<fromBook.State>(

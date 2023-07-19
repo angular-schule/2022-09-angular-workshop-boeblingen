@@ -40,8 +40,3 @@ export const bookFeature = createFeature({
   reducer
 });
 
-export const {
-  selectBookState,
-  selectBooks,
-  selectLoading
-} = bookFeature;
