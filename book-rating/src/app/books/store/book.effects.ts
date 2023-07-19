@@ -1,13 +1,14 @@
-import { Injectable, inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
-import { BookActions } from './book.actions';
+import { inject, Injectable } from '@angular/core';
+import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+
 import { BookStoreService } from '../book-store.service';
+import { BookActions } from './book.actions';
 
 
 @Injectable()
-export class BookEffects {
+export class BookEffects implements OnInitEffects {
 
   booksStore = inject(BookStoreService);
 
@@ -21,4 +22,8 @@ export class BookEffects {
       )
     );
   });
+
+  ngrxOnInitEffects() {
+    return BookActions.loadBooks();
+  }
 }

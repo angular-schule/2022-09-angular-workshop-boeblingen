@@ -29,10 +29,6 @@ export class DashboardComponent {
 
   selectedBook?: Book;
 
-  constructor(store: Store) {
-    // store.dispatch(BookActions.loadBooks());
-  }
-
   doRateUp(book: Book) {
     // const ratedBook = {
     //   ...book,
