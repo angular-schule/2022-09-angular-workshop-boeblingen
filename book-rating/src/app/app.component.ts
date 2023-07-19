@@ -14,5 +14,5 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   ],
 })
 export class AppComponent {
-  title = 'Book Rating 😃';
+  title = 'Book Rating';
 }

@@ -30,7 +30,7 @@ export class DashboardComponent {
   selectedBook?: Book;
 
   constructor(store: Store) {
-    store.dispatch(BookActions.loadBooks());
+    // store.dispatch(BookActions.loadBooks());
   }
 
   doRateUp(book: Book) {
