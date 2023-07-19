@@ -9,8 +9,6 @@
   <br-book
     (rateUp)="doRateUp($event)"
     (rateDown)="doRateDown($event)"
-    [rateDownAllowed]="rs.rateDownAllowed"
-    [rateUpAllowed]="rs.rateUpAllowed"
     [book]="b"></br-book>
 
   <button class="btn btn-primary mb-4" (click)="changeToEditMode(b)">Bearbeiten</button>
