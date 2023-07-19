@@ -9,8 +9,10 @@ import { BookRatingService } from '../shared/book-rating.service';
 import { DashboardComponent } from './dashboard.component';
 
 @Component({
-  selector: 'br-book-form',
-  template: '' })
+    selector: 'br-book-form',
+    template: '',
+    standalone: true
+})
 class DummyBookFormComponent {
   @Output() create = new EventEmitter<Book>();
   @Output() edit = new EventEmitter<Book>();
@@ -18,8 +20,10 @@ class DummyBookFormComponent {
 }
 
 @Component({
-  selector: 'br-book',
-  template: '' })
+    selector: 'br-book',
+    template: '',
+    standalone: true
+})
 class DummyBookComponent {
   @Input() book?: Book;
   @Input() rateUpAllowed?:  () => true;
@@ -44,22 +48,20 @@ describe('DashboardComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [
-        DashboardComponent,
+    imports: [DashboardComponent,
         DummyBookFormComponent,
         DummyBookComponent
         // BookComponent, // Integration-Test
         // BookFormComponent // Integration-Test
-      ],
-      // imports: [
-      //   ReactiveFormsModule // Integration-Test
-      // ],
-      providers: [{
-        provide: BookRatingService,
-        useValue: bookRatingMock
-      }],
-      // schemas: [NO_ERRORS_SCHEMA] // Shallow Unit Test
-    })
+    ],
+    // imports: [
+    //   ReactiveFormsModule // Integration-Test
+    // ],
+    providers: [{
+            provide: BookRatingService,
+            useValue: bookRatingMock
+        }],
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);

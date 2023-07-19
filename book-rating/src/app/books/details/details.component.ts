@@ -1,13 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { catchError, map, mergeAll, mergeMap, of, retry, switchMap } from 'rxjs';
 import { BookStoreService } from '../book-store.service';
+import { AsyncPipe } from '@angular/common';
+import { BookComponent } from '../book/book.component';
 
 @Component({
-  selector: 'br-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+    selector: 'br-details',
+    templateUrl: './details.component.html',
+    styleUrls: ['./details.component.scss'],
+    standalone: true,
+    imports: [BookComponent, RouterLink, AsyncPipe]
 })
 export class DetailsComponent {
 

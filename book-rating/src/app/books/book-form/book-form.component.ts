@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Book } from '../shared/book';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'br-book-form',
-  templateUrl: './book-form.component.html',
-  styleUrls: ['./book-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'br-book-form',
+    templateUrl: './book-form.component.html',
+    styleUrls: ['./book-form.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ReactiveFormsModule, NgIf]
 })
 export class BookFormComponent {
 

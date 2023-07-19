@@ -2,12 +2,21 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BookStoreService } from '../book-store.service';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
+import { BookComponent } from '../book/book.component';
+import { NgFor, NgIf } from '@angular/common';
+import { BookFormComponent } from '../book-form/book-form.component';
 
 @Component({
-  selector: 'br-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'br-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: true,
+    imports: [
+        BookFormComponent,
+        NgFor,
+        BookComponent,
+        NgIf,
+    ],
 })
 export class DashboardComponent {
   books: Book[] = [];

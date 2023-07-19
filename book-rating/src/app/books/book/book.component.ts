@@ -1,11 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '../shared/book';
+import { RouterLink } from '@angular/router';
+import { NgIf, CurrencyPipe } from '@angular/common';
 
 @Component({
-  selector: 'br-book',
-  templateUrl: './book.component.html',
-  styleUrls: ['./book.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'br-book',
+    templateUrl: './book.component.html',
+    styleUrls: ['./book.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, RouterLink, CurrencyPipe]
 })
 export class BookComponent {
 

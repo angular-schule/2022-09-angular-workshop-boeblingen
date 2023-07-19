@@ -11,20 +11,18 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    BookComponent,
-    BookFormComponent,
-    DetailsComponent
-  ],
-  imports: [
-    CommonModule,
-    BooksRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
-  exports: [
-    DashboardComponent
-  ]
+    imports: [
+        CommonModule,
+        BooksRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        DashboardComponent,
+        BookComponent,
+        BookFormComponent,
+        DetailsComponent
+    ],
+    exports: [
+        DashboardComponent
+    ]
 })
 export class BooksModule { }
