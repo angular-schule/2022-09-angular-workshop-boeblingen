@@ -21,7 +21,6 @@ export class BookRatingService {
       ...book,
       rating: Math.max(book.rating - 1, minRating)
     };
-    return book;
   }
 
   rateUpAllowed(book: Book) {
