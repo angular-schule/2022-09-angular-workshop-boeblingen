@@ -1,7 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromBook from './book.reducer';
 import { Book } from '../shared/book';
+import { bookFeature, selectBooks, selectLoading } from './book.reducer';
 
+/*
 export const selectBookState = createFeatureSelector<fromBook.State>(
   fromBook.bookFeatureKey
 );
@@ -15,7 +16,7 @@ export const selectLoading = createSelector(
   selectBookState,
   state => state.loading
 );
-
+*/
 
 // computed selector
 export const selectFirstBook = createSelector(
@@ -30,7 +31,6 @@ export const selectBooksByIsbn = createSelector(
   (books: Book[], props: any) => books.find(x => x.isbn === props.isbn)
 );
 
-// factory selectors
 export function getSelectBooksByIsbn(isbn: string) {
   return createSelector(
     selectBooks,
