@@ -4,7 +4,7 @@
   [book]="selectedBook"
 ></br-book-form>
 
-<ng-container *ngFor="let b of books">
+<ng-container *ngFor="let b of books$ | async">
 
   <br-book
     (rateUp)="doRateUp($event)"
@@ -15,11 +15,13 @@
 
 </ng-container>
 
-<div *ngIf="books.length === 0">
+<div *ngIf="(books$ | async)?.length === 0">
   Keine Bücher vorhanden
 </div>
 
+<h3 *ngIf="loading$ | async">Lade Bücher...</h3>
+
 
 <p>
-  <strong>Anzahl Bücher:</strong> {{ books.length }}
+  <strong>Anzahl Bücher:</strong> {{ (books$ | async)?.length }}
 </p>

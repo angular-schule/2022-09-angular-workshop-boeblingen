@@ -1,27 +1,31 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { BookStoreService } from '../book-store.service';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
 import { BookComponent } from '../book/book.component';
-import { NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { BookFormComponent } from '../book-form/book-form.component';
 import { Store } from '@ngrx/store';
 import { BookActions } from '../store/book.actions';
+import { selectBooks, selectLoading } from '../store/book.selectors';
+
+const DingeDieIchOftBrauche = [NgFor, NgIf, AsyncPipe];
 
 @Component({
-    selector: 'br-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss'],
-    standalone: true,
-    imports: [
-        BookFormComponent,
-        NgFor,
-        BookComponent,
-        NgIf,
-    ],
+  selector: 'br-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
+  standalone: true,
+  imports: [
+    BookFormComponent,
+    BookComponent,
+    ...DingeDieIchOftBrauche
+  ],
 })
 export class DashboardComponent {
-  books: Book[] = [];
+
+  books$ = inject(Store).select(selectBooks);
+  loading$ = inject(Store).select(selectLoading);
 
   selectedBook?: Book;
 
