@@ -10,11 +10,17 @@ const maxRating = 5;
 export class BookRatingService {
 
   rateUp(book: Book): Book {
-    return book;
+    return {
+      ...book,
+      rating: Math.min(book.rating + 1, maxRating)
+    };
   }
 
   rateDown(book: Book): Book {
-    return book;
+    return {
+      ...book,
+      rating: Math.max(book.rating - 1, minRating)
+    };
   }
 
   rateUpAllowed(book: Book) {

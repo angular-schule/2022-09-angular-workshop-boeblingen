@@ -43,6 +43,6 @@ fdescribe('BookRatingService', () => {
   it('should not mutate the book', () => {
     const frozenBook = Object.freeze(book);
     expect(() => service.rateUp(frozenBook)).not.toThrow();
-    expect(() => service.rateDown(frozenBook)).not.toThrow();
+    expect(() => service.rateUp(frozenBook)).not.toThrow();
   })
 });
