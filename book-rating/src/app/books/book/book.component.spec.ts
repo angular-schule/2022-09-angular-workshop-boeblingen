@@ -17,7 +17,14 @@ describe('BookComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  // 😭
+  it('should work as expected', () => {
     expect(component).toBeTruthy();
+
+    // should not throw an exception!
+    component.book = {} as any;
+    component.doRateDown();
+    component.doRateUp();
+    component.log(); // should do nothing here
   });
 });
