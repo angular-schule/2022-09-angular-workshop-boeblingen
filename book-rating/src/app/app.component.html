@@ -8,10 +8,15 @@
     /></a>
     {{ title }}
     </h1>
+    <h2 i18n="@@helloWorld">** Hello World</h2>
 
   <!-- <br-dashboard></br-dashboard> -->
   <router-outlet></router-outlet>
 
 </div>
 
-<!-- <button (click)="1 + 1">Klick mich!</button> -->
+<hr>
+
+Change Language:
+<button class="btn btn-secondary me-2" (click)="changeLocale('de')">DE</button>
+<button class="btn btn-secondary" (click)="changeLocale('en-US')">EN</button>
