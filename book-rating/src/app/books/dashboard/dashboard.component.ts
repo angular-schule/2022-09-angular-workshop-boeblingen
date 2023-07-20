@@ -12,7 +12,7 @@ import { BookFormComponent } from '../book-form/book-form.component';
     styleUrls: ['./dashboard.component.scss'],
     standalone: true,
     imports: [
-        BookFormComponent,
+        BookFormComponent, // Vorsicht: immer noch ein Integration-Test
         NgFor,
         BookComponent,
         NgIf,
