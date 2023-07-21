@@ -9,6 +9,8 @@ import { routes } from './app.routes';
 import { BookEffects } from './app/books/store/book.effects';
 import { bookFeature } from './app/books/store/book.reducer';
 
+import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+
 
 
 export const appConfig: ApplicationConfig = {
@@ -16,10 +18,15 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes /*, withDebugTracing() */),
     provideHttpClient(),
 
-    provideStore(),
+    provideStore({
+      router: routerReducer
+    }),
     provideEffects(),
     provideStoreDevtools({ maxAge:25, logOnly: !isDevMode }),
     provideState(bookFeature),
-    provideEffects(BookEffects)
+    provideEffects(BookEffects),
+
+    // TODO: CustomRouteSerializer
+    provideRouterStore()
   ]
 };

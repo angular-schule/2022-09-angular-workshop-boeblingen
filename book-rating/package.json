@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^16.1.5",
     "@angular/router": "^16.1.5",
     "@ngrx/effects": "^16.1.0",
+    "@ngrx/router-store": "^16.1.0",
     "@ngrx/store": "^16.1.0",
     "@ngrx/store-devtools": "^16.1.0",
     "rxjs": "~7.5.0",
