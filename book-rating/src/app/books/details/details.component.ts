@@ -5,6 +5,8 @@ import { catchError, map, mergeAll, mergeMap, of, retry, switchMap } from 'rxjs'
 import { BookStoreService } from '../book-store.service';
 import { AsyncPipe } from '@angular/common';
 import { BookComponent } from '../book/book.component';
+import { Store } from '@ngrx/store';
+import { selectCurrentBook } from '../store/book.selectors';
 
 @Component({
     selector: 'br-details',
@@ -15,19 +17,5 @@ import { BookComponent } from '../book/book.component';
 })
 export class DetailsComponent {
 
-  bs = inject(BookStoreService);
-
-  book$ = inject(ActivatedRoute).paramMap.pipe(
-    map(paramMap => paramMap.get('isbn')!),
-    switchMap(isbn => this.bs.getSingleBook(isbn).pipe(
-      retry(3),
-      catchError((err: HttpErrorResponse) => of({
-        isbn: '0000',
-        title: 'FEHLER',
-        description: err.message,
-        rating: 1,
-        price: 1
-      }))
-    ))
-  );
+  book$ = inject(Store).select(selectCurrentBook);
 }

@@ -6,7 +6,8 @@ export const bookFeatureKey = 'book';
 
 export interface State {
   books: Book[],
-  loading: boolean
+  loading: boolean,
+  // currentIsbn: string // 2 Quellen der Wahrheit
 }
 
 export const initialState: State = {
