@@ -7,13 +7,21 @@ import { BookStoreService } from '../book-store.service';
 import { BookActions } from './book.actions';
 import { Store } from '@ngrx/store';
 import { selectBooks, selectLastUpdate } from './book.selectors';
+import { PageActions } from './page.actions';
 
 
 @Injectable()
-export class BookEffects implements OnInitEffects {
+export class BookEffects {
 
   store = inject(Store);
   booksStore = inject(BookStoreService);
+
+  triggerLoadBooks$ = createEffect(() => {
+    return inject(Actions).pipe(
+      ofType(PageActions.ready),
+      map(() => BookActions.loadBooks())
+    );
+  });
 
   /*
   loadBooks$ = createEffect(() => {
@@ -49,7 +57,7 @@ export class BookEffects implements OnInitEffects {
     );
   });
 
-  ngrxOnInitEffects() {
-    return BookActions.loadBooks();
-  }
+  // ngrxOnInitEffects() {
+  //   return BookActions.loadBooks();
+  // }
 }
