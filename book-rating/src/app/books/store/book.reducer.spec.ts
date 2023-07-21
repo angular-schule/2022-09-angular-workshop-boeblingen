@@ -3,7 +3,7 @@ import { Book } from '../shared/book';
 import { BookActions } from './book.actions';
 import { reducer, initialState } from './book.reducer';
 
-fdescribe('Book Reducer', () => {
+describe('Book Reducer', () => {
   describe('loadBooks action', () => {
     it('should set loading to true', () => {
       const action = BookActions.loadBooks();
@@ -32,6 +32,28 @@ fdescribe('Book Reducer', () => {
       const state = reducer(initialState, action);
 
       expect(state).toEqual({ ...initialState, loading: false, books: [] });
+    });
+  });
+
+  describe('rateUp action', () => {
+    it('should rateUp the book by one and sort the array', () => {
+
+      const books: Book[] = [
+        { isbn: '1', rating: 3 } as Book,
+        { isbn: '2', rating: 3 } as Book
+      ];
+
+      const action = BookActions.rateUp({ book: books[1] });
+      const state = reducer({ books, loading: false }, action);
+
+      expect(state).toEqual({
+        books: [
+          { isbn: '2', rating: 4 } as Book,
+          { isbn: '1', rating: 3 } as Book
+        ],
+        loading: false
+      });
+
     });
   });
 

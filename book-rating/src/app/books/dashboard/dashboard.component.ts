@@ -17,27 +17,22 @@ const DingeDieIchOftBrauche = [NgFor, NgIf, AsyncPipe];
     BookFormComponent,
     BookComponent,
     ...DingeDieIchOftBrauche
-  ],
+  ]
 })
 export class DashboardComponent {
 
-  loading$ = inject(BookFacadeService).loading$;
-  books$ = inject(BookFacadeService).books$;
+  bookFacade = inject(BookFacadeService);
+  loading$ = this.bookFacade.loading$;
+  books$ = this.bookFacade.books$;
 
   selectedBook?: Book;
 
   doRateUp(book: Book) {
-    // const ratedBook = {
-    //   ...book,
-    //   rating: Math.min(book.rating + 1, 5)
-    // };
-    // const ratedBook = this.rs.rateUp(book);
-    // this.updateList(ratedBook);
+    this.bookFacade.rateUp(book);
   }
 
   doRateDown(book: Book) {
-    // const ratedBook = this.rs.rateDown(book);
-    // this.updateList(ratedBook);
+    this.bookFacade.rateDown(book);
   }
 
   addBook(newBook: Book): void {
@@ -51,11 +46,5 @@ export class DashboardComponent {
 
   changeToEditMode(book: Book): void {
     // this.selectedBook = book;
-  }
-
-  private updateList(ratedBook: Book) {
-    // this.books = this.books
-    //   .map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
-    //   .sort((a, b) => b.rating - a.rating)
   }
 }

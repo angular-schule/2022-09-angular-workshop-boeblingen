@@ -4,30 +4,39 @@ import { Book } from './book';
 const minRating = 1;
 const maxRating = 5;
 
-@Injectable({
-  providedIn: 'root'
-})
-export class BookRatingService {
-
-  rateUp(book: Book): Book {
-    return {
-      ...book,
-      rating: Math.min(book.rating + 1, maxRating)
-    };
+export function rateUp(book: Book): Book {
+  if (!rateUpAllowed(book)) {
+    return book; // same reference 👍
   }
 
-  rateDown(book: Book): Book {
-    return {
-      ...book,
-      rating: Math.max(book.rating - 1, minRating)
-    };
+  return {
+    ...book,
+    rating: book.rating + 1
+  };
+}
+
+export function rateDown(book: Book): Book {
+
+  if (!rateDownAllowed(book)) {
+    return book; // same reference 👍
   }
 
-  rateUpAllowed(book: Book) {
-    return book.rating >= maxRating;
-  }
+  return {
+    ...book,
+    rating: book.rating - 1
+  };
+}
 
-  rateDownAllowed(book: Book) {
-    return book.rating <= minRating;
-  }
+export function updateList(books: Book[], ratedBook: Book) {
+  return books
+    .map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
+    .sort((a, b) => b.rating - a.rating)
+}
+
+export function rateUpAllowed(book: Book) {
+  return book.rating < maxRating;
+}
+
+export function rateDownAllowed(book: Book) {
+  return book.rating > minRating;
 }

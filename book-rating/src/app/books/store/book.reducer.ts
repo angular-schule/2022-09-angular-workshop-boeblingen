@@ -1,6 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { BookActions } from './book.actions';
 import { Book } from '../shared/book';
+import { rateDown, rateUp, updateList } from '../shared/book-rating.service';
 
 export const bookFeatureKey = 'book';
 
@@ -33,7 +34,27 @@ export const reducer = createReducer(
     ...state,
     loading: false,
     books: []
-  }))
+  })),
+
+  // übersichtlicher
+  on(BookActions.rateUp, (state, { book }) => {
+
+    const ratedBook = rateUp(book);
+    const books = updateList(state.books, ratedBook);
+    return {
+      ...state,
+      books
+    };
+  }),
+
+  // kürzer
+  on(BookActions.rateDown, (state, { book }) => ({
+    ...state,
+    books: updateList(state.books, rateDown(book))
+  })),
+
+
+
 );
 
 export const bookFeature = createFeature({
