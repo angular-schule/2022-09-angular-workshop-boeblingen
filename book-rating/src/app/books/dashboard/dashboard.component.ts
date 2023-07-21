@@ -27,6 +27,10 @@ export class DashboardComponent {
 
   selectedBook?: Book;
 
+  reload() {
+    this.bookFacade.loadBooks();
+  }
+
   doRateUp(book: Book) {
     this.bookFacade.rateUp(book);
   }

@@ -9,11 +9,13 @@ export interface State {
   books: Book[],
   loading: boolean,
   // currentIsbn: string // 2 Quellen der Wahrheit
+  lastUpdate: number
 }
 
 export const initialState: State = {
   books: [],
-  loading: false
+  loading: false,
+  lastUpdate: 0
 };
 
 export const reducer = createReducer(
@@ -24,16 +26,18 @@ export const reducer = createReducer(
     loading: true
   })),
 
-  on(BookActions.loadBooksSuccess, (state, { books }) => ({
+  on(BookActions.loadBooksSuccess, (state, { books, lastUpdate }) => ({
     ...state,
     loading: false,
-    books
+    books,
+    lastUpdate
   })),
 
   on(BookActions.loadBooksFailure, state => ({
     ...state,
     loading: false,
-    books: []
+    books: [],
+    lastUpdate: 0
   })),
 
   // übersichtlicher

@@ -7,7 +7,8 @@ import { selectRouteParam } from './utils-ngrx-router/router.selectors';
 export const {
   selectBookState,
   selectBooks,
-  selectLoading
+  selectLoading,
+  selectLastUpdate
 } = bookFeature;
 
 /*

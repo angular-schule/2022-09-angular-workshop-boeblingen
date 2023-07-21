@@ -19,10 +19,15 @@ describe('Book Reducer', () => {
         { isbn: '1' } as Book,
         { isbn: '2' } as Book
       ];
-      const action = BookActions.loadBooksSuccess({ books });
+      const action = BookActions.loadBooksSuccess({ books, lastUpdate: 111 });
       const state = reducer(initialState, action);
 
-      expect(state).toEqual({ ...initialState, loading: false, books });
+      expect(state).toEqual({
+        ...initialState,
+        loading: false,
+        books,
+        lastUpdate: 111
+      });
     });
   });
 
@@ -44,14 +49,15 @@ describe('Book Reducer', () => {
       ];
 
       const action = BookActions.rateUp({ book: books[1] });
-      const state = reducer({ books, loading: false }, action);
+      const state = reducer({ books, loading: false, lastUpdate: 0 }, action);
 
       expect(state).toEqual({
         books: [
           { isbn: '2', rating: 4 } as Book,
           { isbn: '1', rating: 3 } as Book
         ],
-        loading: false
+        loading: false,
+        lastUpdate: 0
       });
 
     });

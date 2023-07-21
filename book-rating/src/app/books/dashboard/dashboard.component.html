@@ -21,6 +21,7 @@
 
 <h3 *ngIf="loading$ | async">Lade Bücher...</h3>
 
+<button (click)="reload()" class="btn btn-primary">Reload</button>
 
 <p>
   <strong>Anzahl Bücher:</strong> {{ (books$ | async)?.length }}
