@@ -18,7 +18,7 @@ export class DummyBookComponent {
   @Input() rateUpAllowed?: any;
 }
 
-fdescribe('DashboardComponent', () => {
+describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
