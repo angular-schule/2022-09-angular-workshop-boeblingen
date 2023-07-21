@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, retry, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { BookStoreService } from '../book-store.service';
 import { BookActions } from './book.actions';
@@ -39,6 +39,10 @@ export class BookEffects implements OnInitEffects {
         (Date.now() - lastUpdate < 10 * 1000) ? of(BookActions.loadBooksSuccess({ books, lastUpdate })) :
 
         this.booksStore.getBooks().pipe(
+          retry({
+            count: 3,
+            delay: 1000
+          }),
           map(books => BookActions.loadBooksSuccess({ books, lastUpdate: Date.now() })),
           catchError(error => of(BookActions.loadBooksFailure({ error }))))
       )
