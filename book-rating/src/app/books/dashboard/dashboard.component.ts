@@ -1,13 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
-import { BookStoreService } from '../book-store.service';
-import { Book } from '../shared/book';
-import { BookRatingService } from '../shared/book-rating.service';
-import { BookComponent } from '../book/book.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { Component, inject } from '@angular/core';
+
 import { BookFormComponent } from '../book-form/book-form.component';
-import { Store } from '@ngrx/store';
-import { BookActions } from '../store/book.actions';
-import { selectBooks, selectLoading } from '../store/book.selectors';
+import { BookComponent } from '../book/book.component';
+import { Book } from '../shared/book';
+import { BookFacadeService } from '../store/book.facade';
 
 const DingeDieIchOftBrauche = [NgFor, NgIf, AsyncPipe];
 
@@ -24,8 +21,8 @@ const DingeDieIchOftBrauche = [NgFor, NgIf, AsyncPipe];
 })
 export class DashboardComponent {
 
-  books$ = inject(Store).select(selectBooks);
-  loading$ = inject(Store).select(selectLoading);
+  loading$ = inject(BookFacadeService).loading$;
+  books$ = inject(BookFacadeService).books$;
 
   selectedBook?: Book;
 
