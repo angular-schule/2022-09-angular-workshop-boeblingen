@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, retry, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, retry, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { BookStoreService } from '../book-store.service';
 import { BookActions } from './book.actions';
@@ -28,7 +28,10 @@ export class BookEffects {
     return inject(Actions).pipe(
       ofRoute(['books/:isbn']),
       mapToParam('isbn'),
-      map(isbn => BookActions.tuWasMitBuch({ isbn }))
+      concatMap(isbn => [
+        BookActions.tuWasMitBuch({ isbn }),
+        ...(isbn === '9783864907791' ? [BookActions.tuWasMitBuch({ isbn })] : [])
+      ])
     );
   });
 
