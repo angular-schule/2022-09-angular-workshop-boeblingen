@@ -10,6 +10,7 @@ import { BookEffects } from './app/books/store/book.effects';
 import { bookFeature } from './app/books/store/book.reducer';
 
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { CustomRouteSerializer } from './app/books/store/utils-ngrx-router/custom-route-serializer';
 
 
 
@@ -25,8 +26,8 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge:25, logOnly: !isDevMode }),
     provideState(bookFeature),
     provideEffects(BookEffects),
-
-    // TODO: CustomRouteSerializer
-    provideRouterStore()
+    provideRouterStore({
+      serializer: CustomRouteSerializer
+    })
   ]
 };

@@ -8,6 +8,7 @@ import { BookActions } from './book.actions';
 import { Store } from '@ngrx/store';
 import { selectBooks, selectLastUpdate } from './book.selectors';
 import { PageActions } from './page.actions';
+import { mapToParam, ofRoute } from './utils-ngrx-router/operators';
 
 
 @Injectable()
@@ -20,6 +21,14 @@ export class BookEffects {
     return inject(Actions).pipe(
       ofType(PageActions.ready),
       map(() => BookActions.loadBooks())
+    );
+  });
+
+  tuWasMitBuch$ = createEffect(() => {
+    return inject(Actions).pipe(
+      ofRoute(['books/:isbn']),
+      mapToParam('isbn'),
+      map(isbn => BookActions.tuWasMitBuch({ isbn }))
     );
   });
 
