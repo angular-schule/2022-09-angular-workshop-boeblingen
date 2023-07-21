@@ -13,5 +13,8 @@ export const BookActions = createActionGroup({
     'Rate Down': props<{ book: Book }>(),
 
     'Tu Was Mit Buch':  props<{ isbn: string }>(),
+
+    'Start Polling': props<{ period: number }>(),
+    'Stop Polling': emptyProps()
   }
 });

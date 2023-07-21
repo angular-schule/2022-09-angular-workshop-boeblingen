@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, concatMap, map, retry, switchMap, withLatestFrom } from 'rxjs/operators';
+import { EMPTY, interval, of, timer } from 'rxjs';
+import { catchError, concatMap, exhaustMap, map, retry, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 import { BookStoreService } from '../book-store.service';
 import { BookActions } from './book.actions';
@@ -67,6 +67,26 @@ export class BookEffects {
           catchError(error => of(BookActions.loadBooksFailure({ error }))))
       )
     );
+  });
+
+  actions = inject(Actions);
+  booksService = inject(BookStoreService);
+
+  startPolling$ = createEffect(() => {
+    return inject(Actions).pipe(
+      ofType(BookActions.startPolling),
+      switchMap(({ period }) => // Start polling when startPolling action is dispatched. Cancel old startPolling actions when new polling called.
+        timer(0, period).pipe(
+          takeUntil(this.actions.pipe(ofType(BookActions.stopPolling))),  // Stop polling when stopPolling action is dispatched.
+          exhaustMap(() => // Perform an HTTP request for each value emitted by the interval. Ignore new values until the HTTP request completes.
+            this.booksService.getBooks().pipe(
+              map(books => BookActions.loadBooksSuccess({ books, lastUpdate: 0 })),
+              catchError(() => EMPTY)
+            )
+          )
+        )
+      )
+    )
   });
 
   // ngrxOnInitEffects() {

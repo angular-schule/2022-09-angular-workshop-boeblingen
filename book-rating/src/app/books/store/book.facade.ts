@@ -25,4 +25,13 @@ export class BookFacadeService {
     this.store.dispatch(BookActions.rateDown({ book }))
   }
 
+  startPolling() {
+    this.store.dispatch(BookActions.startPolling({ period: 1000 }));
+  }
+
+  stopPolling() {
+    this.store.dispatch(BookActions.stopPolling());
+  }
+
+
 }

@@ -21,7 +21,12 @@
 
 <h3 *ngIf="loading$ | async">Lade Bücher...</h3>
 
-<button (click)="reload()" class="btn btn-primary">Reload</button>
+<hr>
+
+<button (click)="reload()" class="btn btn-primary me-2">Reload</button>
+<button (click)="bookFacade.startPolling()" class="btn btn-primary me-2">Start Polling</button>
+<button (click)="bookFacade.stopPolling()" class="btn btn-primary me-2">Stop Polling</button>
+
 
 <p>
   <strong>Anzahl Bücher:</strong> {{ (books$ | async)?.length }}
