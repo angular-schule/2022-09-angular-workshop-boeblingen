@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { catchError, map, mergeAll, mergeMap, of, retry, switchMap } from 'rxjs';
 import { BookStoreService } from '../book-store.service';
@@ -15,7 +15,9 @@ import { BookComponent } from '../book/book.component';
 })
 export class DetailsComponent {
 
-  book$ = this.route.paramMap.pipe(
+  bs = inject(BookStoreService);
+
+  book$ = inject(ActivatedRoute).paramMap.pipe(
     map(paramMap => paramMap.get('isbn')!),
     switchMap(isbn => this.bs.getSingleBook(isbn).pipe(
       retry(3),
@@ -28,8 +30,4 @@ export class DetailsComponent {
       }))
     ))
   );
-
-  constructor(
-    private route: ActivatedRoute,
-    private bs: BookStoreService) { }
 }
