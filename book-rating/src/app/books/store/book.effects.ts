@@ -21,7 +21,7 @@ export class BookEffects implements OnInitEffects {
       ofType(BookActions.loadBooks),
       switchMap(() =>
         this.booksStore.getBooks().pipe(
-          map(books => BookActions.loadBooksSuccess({ books })),
+          map(books => BookActions.loadBooksSuccess({ books, lastUpdate: 0 })),
           catchError(error => of(BookActions.loadBooksFailure({ error }))))
       )
     );
