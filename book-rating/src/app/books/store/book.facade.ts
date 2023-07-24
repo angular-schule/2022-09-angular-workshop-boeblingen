@@ -13,6 +13,9 @@ export class BookFacadeService {
   books$ = this.store.select(selectBooks);
   loading$ = this.store.select(selectLoading);
 
+  books$$ = this.store.selectSignal(selectBooks);
+  loading$$ = this.store.selectSignal(selectLoading);
+
   loadBooks() {
     this.store.dispatch(BookActions.loadBooks())
   }

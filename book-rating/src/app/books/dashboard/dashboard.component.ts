@@ -22,12 +22,15 @@ const DingeDieIchOftBrauche = [NgFor, NgIf, AsyncPipe];
 export class DashboardComponent {
 
   bookFacade = inject(BookFacadeService);
-  loading$ = this.bookFacade.loading$;
-  books$ = this.bookFacade.books$;
+  loading$$ = this.bookFacade.loading$$;
+  books$$ = this.bookFacade.books$$;
 
   selectedBook?: Book;
 
   reload() {
+    const currentBooks = this.books$$()
+
+
     this.bookFacade.loadBooks();
   }
 
